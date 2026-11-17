@@ -82,7 +82,7 @@ jobs:
       - name: Image bauen und nach ECR pushen
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
-          ECR_REPOSITORY: biztrips
+          ECR_REPOSITORY: frontend
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build \
@@ -98,13 +98,13 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: biztrips
-          image: ${{ steps.ecr-login.outputs.registry }}/biztrips:${{ github.sha }}
+          container-name: Main
+          image: ${{ steps.ecr-login.outputs.registry }}/frontend:${{ github.sha }}
 
       - name: ECS-Service deployen
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.render-task-def.outputs.task-definition }}
-          cluster: biztrips-cluster
-          service: biztrips-service
+          cluster: fullstack-cluster
+          service: frontend-task-definition-service-wi4jtggu
           wait-for-service-stability: true
