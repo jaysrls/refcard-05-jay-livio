@@ -60,7 +60,6 @@ Im Code:
 
 ![img6png](imgs/img_6.png)
 
-Auf AWS:
 
 ## 8. RDS einrichten
 ![img12png](imgs/img_12.png)
